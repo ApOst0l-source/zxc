@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Товари | Grib Shop</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="modern.css">
+<script defer src="modern.js"></script>
+
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>Grib Shop</h1>
+      <nav class="nav">
+        <a href="index.html">Головна</a>
+        <a href="products.html">Товари</a>
+        <a href="contact.html">Контакти</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main container">
+    <h2>Наші товари</h2>
+    <div class="products-grid">
+      <div class="product-card">
+        <img src="images.jpg" alt="Білі гриби" />
+        <h3>Білі гриби</h3>
+        <p>Ціна: 200 грн/кг</p>
+        <button onclick="addToCart('Білі гриби', 200)">Додати до кошика</button>
+      </div>
+
+      <div class="product-card">
+        <img src="lysychka-zvychajna-cantharellus-cibarius-5.jpg" alt="Лисички" />
+        <h3>Лисички</h3>
+        <p>Ціна: 180 грн/кг</p>
+        <button onclick="addToCart('Лисички', 180)">Додати до кошика</button>
+      </div>
+
+      <div class="product-card">
+        <img src="image.jpg" alt="Гливи" />
+        <h3>Гливи</h3>
+        <p>Ціна: 120 грн/кг</p>
+        <button onclick="addToCart('Гливи', 120)">Додати до кошика</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images (1).jpg" alt="Шиїтаке" />
+        <h3>Шиїтаке</h3>
+        <p>Ціна: 250 грн/кг</p>
+        <button onclick="addToCart('Шиїтаке', 250)">Додати до кошика</button>
+      </div>
+    </div>
+
+    <section class="cart">
+      <h3>Кошик</h3>
+      <ul id="cart-items"></ul>
+      <p><strong>Загальна сума:</strong> <span id="total">0</span> грн</p>
+    </section>
+  </main>
+  
+
+  <footer class="footer">
+    <div class="container">
+    </div>
+  </footer>
+
+  <script>
+    const cart = [];
+
+    function addToCart(name, price) {
+      const item = { name, price };
+      cart.push(item);
+      updateCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function updateCart() {
+      const list = document.getElementById('cart-items');
+      const total = document.getElementById('total');
+      list.innerHTML = '';
+      let sum = 0;
+      cart.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.className = 'cart-item animate';
+        li.innerHTML = `${item.name} - ${item.price} грн <button onclick="removeFromCart(${index})">✖</button>`;
+        list.appendChild(li);
+        sum += item.price;
+      });
+      total.textContent = sum;
+    }
+  </script>
+</body>
+</html>
